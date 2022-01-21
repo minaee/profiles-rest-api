@@ -2,6 +2,7 @@ from os import stat
 from urllib import response
 from django.shortcuts import render
 
+from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -69,3 +70,22 @@ class HelloApiView(APIView):
         """
         
         return Response({'method': 'delete'})
+    
+
+class HelloViewSet(viewsets.ViewSet):
+    """
+    test API viewset
+    """
+    
+    def list(self, request):
+        """
+        return ahello message
+        """
+        
+        a_viewset = [
+            'Users actions (list, create, retrieve, update, partial_update)',
+            'Automatically maps to urls using routers',
+            'Previous more functionalty with less code.'
+        ]
+        
+        return Response({'message': 'Hello!', 'a_viewset': a_viewset})
