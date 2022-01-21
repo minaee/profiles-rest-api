@@ -1,4 +1,5 @@
 from os import stat
+from statistics import mode
 from urllib import response
 from django.shortcuts import render
 
@@ -7,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from . import serializers
+from . import serializers, models
 
 # Create your views here.
 
@@ -135,3 +136,13 @@ class HelloViewSet(viewsets.ViewSet):
         """
         
         return Response({'http_method': "Delete"})
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """
+    handles creating reading and updating profiles
+    """
+    
+    serializer_class = serializers.UserProfileSerializer
+    
+    queryset = models.UserProfile.objects.all()
